@@ -10,12 +10,41 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellEmailRouteImport } from './routes/_shell.email'
+import { Route as ShellMeetingRouteImport } from './routes/_shell.meeting'
+import { Route as ShellResearchRouteImport } from './routes/_shell.research'
+import { Route as ShellTasksRouteImport } from './routes/_shell.tasks'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellEmailRoute = ShellEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellMeetingRoute = ShellMeetingRouteImport.update({
+  id: '/meeting',
+  path: '/meeting',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellResearchRoute = ShellResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTasksRoute = ShellTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => ShellRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -25,27 +54,49 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/email': typeof ShellEmailRoute
+  '/meeting': typeof ShellMeetingRoute
+  '/research': typeof ShellResearchRoute
+  '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/email': typeof ShellEmailRoute
+  '/meeting': typeof ShellMeetingRoute
+  '/research': typeof ShellResearchRoute
+  '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/email': typeof ShellEmailRoute
+  '/_shell/meeting': typeof ShellMeetingRoute
+  '/_shell/research': typeof ShellResearchRoute
+  '/_shell/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/chat'
+  fullPaths: '/' | '/email' | '/meeting' | '/research' | '/tasks' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/chat'
-  id: '__root__' | '/' | '/api/chat'
+  to: '/' | '/email' | '/meeting' | '/research' | '/tasks' | '/api/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/_shell/email'
+    | '/_shell/meeting'
+    | '/_shell/research'
+    | '/_shell/tasks'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
 }
 
@@ -58,6 +109,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/email': {
+      id: '/_shell/email'
+      path: '/email'
+      fullPath: '/email'
+      preLoaderRoute: typeof ShellEmailRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/meeting': {
+      id: '/_shell/meeting'
+      path: '/meeting'
+      fullPath: '/meeting'
+      preLoaderRoute: typeof ShellMeetingRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/research': {
+      id: '/_shell/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ShellResearchRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/tasks': {
+      id: '/_shell/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof ShellTasksRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -68,8 +154,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ShellRouteChildren {
+  ShellEmailRoute: typeof ShellEmailRoute
+  ShellMeetingRoute: typeof ShellMeetingRoute
+  ShellResearchRoute: typeof ShellResearchRoute
+  ShellTasksRoute: typeof ShellTasksRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellEmailRoute: ShellEmailRoute,
+  ShellMeetingRoute: ShellMeetingRoute,
+  ShellResearchRoute: ShellResearchRoute,
+  ShellTasksRoute: ShellTasksRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
