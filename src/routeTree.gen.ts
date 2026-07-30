@@ -10,33 +10,191 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellEmailRouteImport } from './routes/_shell.email'
+import { Route as ShellHelpRouteImport } from './routes/_shell.help'
+import { Route as ShellMeetingRouteImport } from './routes/_shell.meeting'
+import { Route as ShellResearchRouteImport } from './routes/_shell.research'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellTasksRouteImport } from './routes/_shell.tasks'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ShellChatIndexRouteImport } from './routes/_shell.chat.index'
+import { Route as ShellChatThreadIdRouteImport } from './routes/_shell.chat.$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellEmailRoute = ShellEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellHelpRoute = ShellHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellMeetingRoute = ShellMeetingRouteImport.update({
+  id: '/meeting',
+  path: '/meeting',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellResearchRoute = ShellResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTasksRoute = ShellTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellChatIndexRoute = ShellChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellChatThreadIdRoute = ShellChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/email': typeof ShellEmailRoute
+  '/help': typeof ShellHelpRoute
+  '/meeting': typeof ShellMeetingRoute
+  '/research': typeof ShellResearchRoute
+  '/settings': typeof ShellSettingsRoute
+  '/tasks': typeof ShellTasksRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/chat/': typeof ShellChatIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/email': typeof ShellEmailRoute
+  '/help': typeof ShellHelpRoute
+  '/meeting': typeof ShellMeetingRoute
+  '/research': typeof ShellResearchRoute
+  '/settings': typeof ShellSettingsRoute
+  '/tasks': typeof ShellTasksRoute
+  '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/chat': typeof ShellChatIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_shell/analytics': typeof ShellAnalyticsRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/email': typeof ShellEmailRoute
+  '/_shell/help': typeof ShellHelpRoute
+  '/_shell/meeting': typeof ShellMeetingRoute
+  '/_shell/research': typeof ShellResearchRoute
+  '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/tasks': typeof ShellTasksRoute
+  '/api/chat': typeof ApiChatRoute
+  '/_shell/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/_shell/chat/': typeof ShellChatIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/analytics'
+    | '/dashboard'
+    | '/email'
+    | '/help'
+    | '/meeting'
+    | '/research'
+    | '/settings'
+    | '/tasks'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/analytics'
+    | '/dashboard'
+    | '/email'
+    | '/help'
+    | '/meeting'
+    | '/research'
+    | '/settings'
+    | '/tasks'
+    | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/auth'
+    | '/_shell/analytics'
+    | '/_shell/dashboard'
+    | '/_shell/email'
+    | '/_shell/help'
+    | '/_shell/meeting'
+    | '/_shell/research'
+    | '/_shell/settings'
+    | '/_shell/tasks'
+    | '/api/chat'
+    | '/_shell/chat/$threadId'
+    | '/_shell/chat/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +206,134 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/analytics': {
+      id: '/_shell/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ShellAnalyticsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/email': {
+      id: '/_shell/email'
+      path: '/email'
+      fullPath: '/email'
+      preLoaderRoute: typeof ShellEmailRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/help': {
+      id: '/_shell/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof ShellHelpRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/meeting': {
+      id: '/_shell/meeting'
+      path: '/meeting'
+      fullPath: '/meeting'
+      preLoaderRoute: typeof ShellMeetingRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/research': {
+      id: '/_shell/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ShellResearchRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/tasks': {
+      id: '/_shell/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof ShellTasksRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/chat/': {
+      id: '/_shell/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof ShellChatIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/chat/$threadId': {
+      id: '/_shell/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ShellChatThreadIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
+interface ShellRouteChildren {
+  ShellAnalyticsRoute: typeof ShellAnalyticsRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellEmailRoute: typeof ShellEmailRoute
+  ShellHelpRoute: typeof ShellHelpRoute
+  ShellMeetingRoute: typeof ShellMeetingRoute
+  ShellResearchRoute: typeof ShellResearchRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+  ShellTasksRoute: typeof ShellTasksRoute
+  ShellChatThreadIdRoute: typeof ShellChatThreadIdRoute
+  ShellChatIndexRoute: typeof ShellChatIndexRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyticsRoute: ShellAnalyticsRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
+  ShellEmailRoute: ShellEmailRoute,
+  ShellHelpRoute: ShellHelpRoute,
+  ShellMeetingRoute: ShellMeetingRoute,
+  ShellResearchRoute: ShellResearchRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+  ShellTasksRoute: ShellTasksRoute,
+  ShellChatThreadIdRoute: ShellChatThreadIdRoute,
+  ShellChatIndexRoute: ShellChatIndexRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
