@@ -131,6 +131,81 @@ The interface follows a modern SaaS design with:
 - Font Awesome
 - Google Fonts (Poppins)
 
+# Tech Stack
+
+<table>
+<tr>
+<td align="center" width="120">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="55"/><br>
+<strong>HTML5</strong>
+</td>
+
+<td align="center" width="120">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="55"/><br>
+<strong>CSS3</strong>
+</td>
+
+<td align="center" width="120">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="55"/><br>
+<strong>JavaScript</strong>
+</td>
+
+<td align="center" width="120">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="55"/><br>
+<strong>Git</strong>
+</td>
+
+<td align="center" width="120">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="55"/><br>
+<strong>GitHub</strong>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="55"/><br>
+<strong>VS Code</strong>
+</td>
+
+<td align="center">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" width="55"/><br>
+<strong>Three.js</strong>
+</td>
+
+<td align="center">
+<img src="https://www.chartjs.org/img/chartjs-logo.svg" width="55"/><br>
+<strong>Chart.js</strong>
+</td>
+
+<td align="center">
+<img src="https://www.vectorlogo.zone/logos/openai/openai-icon.svg" width="55"/><br>
+<strong>OpenAI API</strong>
+</td>
+
+<td align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" width="55"/><br>
+<strong>Responsive UI</strong>
+</td>
+</tr>
+</table>
+
+## Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Application structure |
+| CSS3 | Styling, animations, glassmorphism and responsive design |
+| JavaScript (ES6) | Application logic and AI interactions |
+| Three.js | Animated 3D particle background and AI network |
+| Chart.js | Dashboard analytics and usage visualisation |
+| OpenAI API | AI-powered workplace tools |
+| Font Awesome | Professional icon library |
+| Google Fonts (Poppins) | Modern typography |
+| Git | Version control |
+| GitHub | Repository hosting and collaboration |
+| VS Code | Development environment |
+
+
 ## AI
 
 - OpenAI API
