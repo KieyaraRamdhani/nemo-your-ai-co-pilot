@@ -68,7 +68,7 @@ export const Route = createFileRoute("/api/chat")({
         const result = streamText({
           model: gateway(NEMO_MODEL),
           system: SYSTEM_PROMPTS.chat,
-          messages: convertToModelMessages(messages),
+          messages: await convertToModelMessages(messages),
           providerOptions: { lovable: { reasoningEffort: "none" } },
         });
 
