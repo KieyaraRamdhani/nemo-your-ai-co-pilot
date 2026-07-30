@@ -5,6 +5,24 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
+ * NEMO DESIGN SYSTEM — "Ocean Intelligence"
+ * Deep ocean navy surfaces, bright aqua accents, glassmorphism.
+ * All colours are semantic tokens. Never hardcode colours in components.
+ */
+
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --color-aqua: var(--aqua);
+  --color-aqua-soft: var(--aqua-soft);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --color-ocean-deep: var(--ocean-deep);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+}
+
+/*
  * Design system definition.
  *
  * The @theme inline block maps CSS custom properties to Tailwind utility
