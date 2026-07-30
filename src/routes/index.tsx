@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ChevronRight, CircleInfo, Cpu, PenLine, Rocket, ShieldCheck, Check } from "lucide-react";
+import { ChevronRight, Info, Cpu, PenLine, Rocket, ShieldCheck, Check } from "lucide-react";
 
 import { NemoLogo } from "@/components/nemo/NemoLogo";
 import { SiteFooter } from "@/components/nemo/SiteFooter";
@@ -91,7 +91,7 @@ function Home() {
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-xl">
                 <Link to="/help">
-                  <CircleInfo className="size-4" /> Learn More
+                  <Info className="size-4" /> Learn More
                 </Link>
               </Button>
             </div>
