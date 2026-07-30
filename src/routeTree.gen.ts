@@ -18,6 +18,8 @@ import { Route as ShellMeetingRouteImport } from './routes/_shell.meeting'
 import { Route as ShellResearchRouteImport } from './routes/_shell.research'
 import { Route as ShellTasksRouteImport } from './routes/_shell.tasks'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ShellChatIndexRouteImport } from './routes/_shell.chat.index'
+import { Route as ShellChatThreadIdRouteImport } from './routes/_shell.chat.$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -63,6 +65,16 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellChatIndexRoute = ShellChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellChatThreadIdRoute = ShellChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +85,8 @@ export interface FileRoutesByFullPath {
   '/research': typeof ShellResearchRoute
   '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/chat/': typeof ShellChatIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,6 +97,8 @@ export interface FileRoutesByTo {
   '/research': typeof ShellResearchRoute
   '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
+  '/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/chat': typeof ShellChatIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +111,8 @@ export interface FileRoutesById {
   '/_shell/research': typeof ShellResearchRoute
   '/_shell/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
+  '/_shell/chat/$threadId': typeof ShellChatThreadIdRoute
+  '/_shell/chat/': typeof ShellChatIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +125,8 @@ export interface FileRouteTypes {
     | '/research'
     | '/tasks'
     | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,6 +137,8 @@ export interface FileRouteTypes {
     | '/research'
     | '/tasks'
     | '/api/chat'
+    | '/chat/$threadId'
+    | '/chat'
   id:
     | '__root__'
     | '/'
@@ -128,6 +150,8 @@ export interface FileRouteTypes {
     | '/_shell/research'
     | '/_shell/tasks'
     | '/api/chat'
+    | '/_shell/chat/$threadId'
+    | '/_shell/chat/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -201,6 +225,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell/chat/': {
+      id: '/_shell/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof ShellChatIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/chat/$threadId': {
+      id: '/_shell/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ShellChatThreadIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
@@ -211,6 +249,8 @@ interface ShellRouteChildren {
   ShellMeetingRoute: typeof ShellMeetingRoute
   ShellResearchRoute: typeof ShellResearchRoute
   ShellTasksRoute: typeof ShellTasksRoute
+  ShellChatThreadIdRoute: typeof ShellChatThreadIdRoute
+  ShellChatIndexRoute: typeof ShellChatIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
@@ -220,6 +260,8 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellMeetingRoute: ShellMeetingRoute,
   ShellResearchRoute: ShellResearchRoute,
   ShellTasksRoute: ShellTasksRoute,
+  ShellChatThreadIdRoute: ShellChatThreadIdRoute,
+  ShellChatIndexRoute: ShellChatIndexRoute,
 }
 
 const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
