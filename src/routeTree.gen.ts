@@ -11,11 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellEmailRouteImport } from './routes/_shell.email'
+import { Route as ShellHelpRouteImport } from './routes/_shell.help'
 import { Route as ShellMeetingRouteImport } from './routes/_shell.meeting'
 import { Route as ShellResearchRouteImport } from './routes/_shell.research'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellTasksRouteImport } from './routes/_shell.tasks'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ShellChatIndexRouteImport } from './routes/_shell.chat.index'
@@ -28,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
@@ -45,6 +53,11 @@ const ShellEmailRoute = ShellEmailRouteImport.update({
   path: '/email',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellHelpRoute = ShellHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellMeetingRoute = ShellMeetingRouteImport.update({
   id: '/meeting',
   path: '/meeting',
@@ -53,6 +66,11 @@ const ShellMeetingRoute = ShellMeetingRouteImport.update({
 const ShellResearchRoute = ShellResearchRouteImport.update({
   id: '/research',
   path: '/research',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellTasksRoute = ShellTasksRouteImport.update({
@@ -78,11 +96,14 @@ const ShellChatThreadIdRoute = ShellChatThreadIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/email': typeof ShellEmailRoute
+  '/help': typeof ShellHelpRoute
   '/meeting': typeof ShellMeetingRoute
   '/research': typeof ShellResearchRoute
+  '/settings': typeof ShellSettingsRoute
   '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
   '/chat/$threadId': typeof ShellChatThreadIdRoute
@@ -90,11 +111,14 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/email': typeof ShellEmailRoute
+  '/help': typeof ShellHelpRoute
   '/meeting': typeof ShellMeetingRoute
   '/research': typeof ShellResearchRoute
+  '/settings': typeof ShellSettingsRoute
   '/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
   '/chat/$threadId': typeof ShellChatThreadIdRoute
@@ -104,11 +128,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/email': typeof ShellEmailRoute
+  '/_shell/help': typeof ShellHelpRoute
   '/_shell/meeting': typeof ShellMeetingRoute
   '/_shell/research': typeof ShellResearchRoute
+  '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/tasks': typeof ShellTasksRoute
   '/api/chat': typeof ApiChatRoute
   '/_shell/chat/$threadId': typeof ShellChatThreadIdRoute
@@ -118,11 +145,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/analytics'
     | '/dashboard'
     | '/email'
+    | '/help'
     | '/meeting'
     | '/research'
+    | '/settings'
     | '/tasks'
     | '/api/chat'
     | '/chat/$threadId'
@@ -130,11 +160,14 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/analytics'
     | '/dashboard'
     | '/email'
+    | '/help'
     | '/meeting'
     | '/research'
+    | '/settings'
     | '/tasks'
     | '/api/chat'
     | '/chat/$threadId'
@@ -143,11 +176,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_shell'
+    | '/auth'
     | '/_shell/analytics'
     | '/_shell/dashboard'
     | '/_shell/email'
+    | '/_shell/help'
     | '/_shell/meeting'
     | '/_shell/research'
+    | '/_shell/settings'
     | '/_shell/tasks'
     | '/api/chat'
     | '/_shell/chat/$threadId'
@@ -157,6 +193,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ShellRoute: typeof ShellRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
@@ -174,6 +211,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_shell/analytics': {
@@ -197,6 +241,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellEmailRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/help': {
+      id: '/_shell/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof ShellHelpRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/meeting': {
       id: '/_shell/meeting'
       path: '/meeting'
@@ -209,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/research'
       fullPath: '/research'
       preLoaderRoute: typeof ShellResearchRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/tasks': {
@@ -246,8 +304,10 @@ interface ShellRouteChildren {
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
   ShellEmailRoute: typeof ShellEmailRoute
+  ShellHelpRoute: typeof ShellHelpRoute
   ShellMeetingRoute: typeof ShellMeetingRoute
   ShellResearchRoute: typeof ShellResearchRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
   ShellTasksRoute: typeof ShellTasksRoute
   ShellChatThreadIdRoute: typeof ShellChatThreadIdRoute
   ShellChatIndexRoute: typeof ShellChatIndexRoute
@@ -257,8 +317,10 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellDashboardRoute: ShellDashboardRoute,
   ShellEmailRoute: ShellEmailRoute,
+  ShellHelpRoute: ShellHelpRoute,
   ShellMeetingRoute: ShellMeetingRoute,
   ShellResearchRoute: ShellResearchRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
   ShellTasksRoute: ShellTasksRoute,
   ShellChatThreadIdRoute: ShellChatThreadIdRoute,
   ShellChatIndexRoute: ShellChatIndexRoute,
@@ -269,6 +331,7 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ShellRoute: ShellRouteWithChildren,
+  AuthRoute: AuthRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
