@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellEmailRouteImport } from './routes/_shell.email'
 import { Route as ShellMeetingRouteImport } from './routes/_shell.meeting'
 import { Route as ShellResearchRouteImport } from './routes/_shell.research'
@@ -25,6 +27,16 @@ const IndexRoute = IndexRouteImport.update({
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
 } as any)
 const ShellEmailRoute = ShellEmailRouteImport.update({
   id: '/email',
@@ -54,6 +66,8 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/dashboard': typeof ShellDashboardRoute
   '/email': typeof ShellEmailRoute
   '/meeting': typeof ShellMeetingRoute
   '/research': typeof ShellResearchRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/dashboard': typeof ShellDashboardRoute
   '/email': typeof ShellEmailRoute
   '/meeting': typeof ShellMeetingRoute
   '/research': typeof ShellResearchRoute
@@ -72,6 +88,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/_shell/analytics': typeof ShellAnalyticsRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/email': typeof ShellEmailRoute
   '/_shell/meeting': typeof ShellMeetingRoute
   '/_shell/research': typeof ShellResearchRoute
@@ -80,13 +98,31 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/email' | '/meeting' | '/research' | '/tasks' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/dashboard'
+    | '/email'
+    | '/meeting'
+    | '/research'
+    | '/tasks'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/email' | '/meeting' | '/research' | '/tasks' | '/api/chat'
+  to:
+    | '/'
+    | '/analytics'
+    | '/dashboard'
+    | '/email'
+    | '/meeting'
+    | '/research'
+    | '/tasks'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
     | '/_shell'
+    | '/_shell/analytics'
+    | '/_shell/dashboard'
     | '/_shell/email'
     | '/_shell/meeting'
     | '/_shell/research'
@@ -115,6 +151,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_shell/analytics': {
+      id: '/_shell/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ShellAnalyticsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
     }
     '/_shell/email': {
       id: '/_shell/email'
@@ -155,6 +205,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface ShellRouteChildren {
+  ShellAnalyticsRoute: typeof ShellAnalyticsRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
   ShellEmailRoute: typeof ShellEmailRoute
   ShellMeetingRoute: typeof ShellMeetingRoute
   ShellResearchRoute: typeof ShellResearchRoute
@@ -162,6 +214,8 @@ interface ShellRouteChildren {
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyticsRoute: ShellAnalyticsRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
   ShellEmailRoute: ShellEmailRoute,
   ShellMeetingRoute: ShellMeetingRoute,
   ShellResearchRoute: ShellResearchRoute,
